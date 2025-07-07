@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookList } from './components/bookList';
+import {BookList} from './components/bookList';
 import Navbar from './components/navBar';
 
 type Book = {
@@ -28,20 +28,36 @@ const initialBooks: Book[] = [
 ];
 
 const App: React.FC = () => {
-  // books state olarak tutuluyor ki güncellenebilsin
   const [books, setBooks] = useState<Book[]>(initialBooks);
 
-  // Kitap silme fonksiyonu
+  const [showModal, setShowModal] = useState(false);
+
   const handleDelete = (title: string) => {
     setBooks(prevBooks => prevBooks.filter(book => book.title !== title));
   };
 
   return (
     <>
-      <Navbar />
+      <Navbar onAddBookClick={() => setShowModal(true)} />
+
       <main className="mt-24 p-6">
         <h1 className="text-center text-3xl font-bold mb-8">Library Manager</h1>
+
         <BookList books={books} onDelete={handleDelete} />
+
+        {showModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+            <div className="bg-white p-6 rounded shadow-lg">
+              <h2 className="text-xl font-bold mb-4">Add New Book (Henüz yapılmadı)</h2>
+              <button 
+                onClick={() => setShowModal(false)} 
+                className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       </main>
     </>
   );
