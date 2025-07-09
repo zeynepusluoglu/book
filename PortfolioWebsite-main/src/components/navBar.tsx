@@ -1,13 +1,11 @@
 import React from "react";
 import AddBook from "./addBook";
 
-// Props tipini tanımlıyoruz
-type NavbarProps = {
+type NavBarProps = {
   onAddBookClick: () => void;
 };
 
-// Props'u burada alıyoruz
-const Navbar: React.FC<NavbarProps> = ({ onAddBookClick }) => {
+const NavBar: React.FC<NavBarProps> = ({ onAddBookClick }) => {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white shadow-md px-6 py-4 flex justify-between items-center">
       <div className="text-2xl font-bold text-blue-600">
@@ -31,4 +29,4 @@ const Navbar: React.FC<NavbarProps> = ({ onAddBookClick }) => {
   );
 };
 
-export default Navbar;
+export default NavBar;
